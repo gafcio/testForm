@@ -11,7 +11,8 @@ import { FormService } from '../../core/services/form-service.service';
 export class FirstFormComponent implements OnInit {
 
   aboutForm: FormGroup;
-  emplyeesData: object;
+  categories: object;
+  employes: object
 
   constructor(
     private fb: FormBuilder,
@@ -21,15 +22,23 @@ export class FirstFormComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getEmployeesData();
+    this.getCategories();
+    this.getEmployees()
     this.setValidators();
 
   }
 
-  getEmployeesData() {
+  getCategories() {
     this.service.getCategories().subscribe(res => {
-      this.emplyeesData = res;
-      console.log(this.emplyeesData);
+      this.categories = res;
+      console.log(this.categories);
+    });
+  }
+
+  getEmployees(): void {
+    this.service.getEmployees().subscribe(res => {
+      this.employes = res;
+      console.log(this.employes);
     });
   }
 
@@ -39,7 +48,9 @@ export class FirstFormComponent implements OnInit {
       description: ['', [Validators.required, Validators.maxLength(140)]],
       category: ['', Validators.required],
       options: '',
-      eventRadio: ['', Validators.required]
+      eventRadio: ['', Validators.required],
+      email: ['', Validators.required],
+      employee: ['', Validators.required]
       // number: ['', [Validators.required, Validators.maxLength(40)]]
     });
   }

@@ -1,16 +1,18 @@
-<mat-card class="card-margin-top">
-  <mat-card-header>
-    <h4 class="primary">About</h4>
-  </mat-card-header>
-  <mat-card-content>
-    <form [formGroup]="aboutForm">
+<form [formGroup]="aboutForm">
+  <mat-card class="card-margin-top">
+    <mat-card-header>
+      <h4 class="primary">About</h4>
+    </mat-card-header>
+    <mat-card-content>
+
 
       <div class="row space-top">
         <div class="col-3 label-align">
           <label for="title" style="margin-bottom: 0px">TITLE</label>
         </div>
         <div class="col-6">
-          <input id="title" type="text" class="form-control" placeholder="Make it short and clean" formControlName="title">
+          <input id="title" type="text" class="form-control" placeholder="Make it short and clean"
+                 formControlName="title">
         </div>
         <div class="col-3">
           <span>validation info</span>
@@ -22,7 +24,8 @@
           <label for="description" style="margin-bottom: 0px">DESCRIPTION</label>
         </div>
         <div class="col-6">
-          <textarea id="description" type="text" rows="6" class="form-control" placeholder="Make it short and clean" formControlName="description" style="resize: none"></textarea>
+          <textarea id="description" type="text" rows="6" class="form-control" placeholder="Make it short and clean"
+                    formControlName="description" style="resize: none"></textarea>
         </div>
         <div class="col-3">
           <span>validation info</span>
@@ -34,10 +37,10 @@
           <label for="category">OPTIONS</label>
         </div>
         <div class="col-6">
-            <select class="custom-select" formControlName="category" id="category">
-              <option selected>Choose...</option>
-              <option *ngFor="let singleCategory of emplyeesData">{{singleCategory.name}}</option>
-            </select>
+          <select class="custom-select" formControlName="category" id="category">
+            <option selected>Choose...</option>
+            <option *ngFor="let singleCategory of emplyeesData">{{singleCategory.name}}</option>
+          </select>
         </div>
         <div class="col-3">
           <span>validation info</span>
@@ -50,11 +53,13 @@
         </div>
         <div class="col-6">
           <div class="form-check form-check-inline" id="payment">
-            <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio1" value="option1" formControlName="eventRadio">
+            <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio1" value="option1"
+                   formControlName="eventRadio">
             <label class="form-check-label" for="inlineRadio1">Free event</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio2" value="option2" formControlName="eventRadio">
+            <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio2" value="option2"
+                   formControlName="eventRadio">
             <label class="form-check-label" for="inlineRadio2">Paid event</label>
           </div>
         </div>
@@ -72,15 +77,52 @@
           <span style="margin-left: 1rem">reward points for attendance</span>
         </div>
         <div class="col-3">
-          <span >validation info</span>
+          <span>validation info</span>
         </div>
       </div>
 
 
-    </form>
-    <p>
-      Value: {{ aboutForm.value | json }}
-      Valid: {{ aboutForm.valid | json }}
-    </p>
-  </mat-card-content>
-</mat-card>
+      <p>
+        Value: {{ aboutForm.value | json }}
+        Valid: {{ aboutForm.valid | json }}
+      </p>
+    </mat-card-content>
+
+  </mat-card>
+
+  <mat-card class="card-margin-top">
+    <mat-card-header>
+      <h4>Coordinator</h4>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row space-top">
+        <div class="col-3 label-align">
+          <label for="category">OPTIONS</label>
+        </div>
+        <div class="col-6">
+          <select class="custom-select" formControlName="employee" id="category">
+            <option selected>Choose...</option>
+            <option *ngFor="let singleEmployee of employes">{{singleEmployee.name}}</option>
+          </select>
+        </div>
+        <div class="col-3">
+          <span>validation info</span>
+        </div>
+      </div>
+
+
+      <div class="row space-top">
+        <div class="col-3 label-align">
+          <label for="title" style="margin-bottom: 0px">TITLE</label>
+        </div>
+        <div class="col-6">
+          <input id="email" type="text" class="form-control" placeholder="Make it short and clean"
+                 formControlName="email">
+        </div>
+        <div class="col-3">
+          <span>validation info</span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</form>
