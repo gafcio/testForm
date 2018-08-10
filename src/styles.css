@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body{
+  background-color: #f9f9f9;
+}
+
+.container{
+  width: 900px;
+  margin: 0 auto;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.position-left {
+  margin-left: 10rem;
+}
+
+.card-margin-top {
+  margin-top: 2rem;
+}
+
+.label-align {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
