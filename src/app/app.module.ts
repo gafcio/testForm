@@ -9,6 +9,8 @@ import { FirstFormComponent } from './pages/first-form/first-form.component';
 import { SecondFormComponent } from './pages/second-form/second-form.component';
 import { ThirdFormComponent } from './pages/third-form/third-form.component';
 import { HeaderComponent } from './modules/shared/header/header.component';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,10 +25,12 @@ import { HeaderComponent } from './modules/shared/header/header.component';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule,
+    HttpClientModule
 
   ],
-  providers: [],
+  providers: [HttpModule, HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
