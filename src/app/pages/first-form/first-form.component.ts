@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {FormService} from '../../core/services/form-service.service';
 
 
@@ -44,15 +44,16 @@ export class FirstFormComponent implements OnInit {
 
   setValidators() {
     this.aboutForm = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', [Validators.required, Validators.maxLength(140)]],
+      title: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(100)])],
+      description: ['', [Validators.required, Validators.maxLength(140), Validators.minLength(2)]],
       category: ['', Validators.required],
       options: '',
       eventRadio: ['', Validators.required],
       email: ['', Validators.required],
       employee: ['', Validators.required],
       fee: '',
-      calendar: ['', Validators.required]
+      calendar: ['', Validators.required],
+      timeRadio: ''
       // number: ['', [Validators.required, Validators.maxLength(40)]]
     });
   }
@@ -73,7 +74,7 @@ export class FirstFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.warn(this.aboutForm.value);
+    console.warn(this.aboutForm);
   }
 
 }

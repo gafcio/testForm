@@ -17,7 +17,20 @@
                  formControlName="title">
         </div>
         <div class="col-2">
-          <span>validation info</span>
+          <div class="alert alert-danger validation-alert"
+               *ngIf="aboutForm.controls.title.invalid && (aboutForm.controls.title.dirty || aboutForm.controls.title.touched)">
+            <div *ngIf="aboutForm.controls.title.errors.required">
+              title is required
+            </div>
+            <div *ngIf="aboutForm.controls.title.errors.maxLength">
+              Too much length
+              <p>dupa</p>
+            </div>
+            <div *ngIf="aboutForm.controls.title.errors.minLength">
+              More text
+              <p>cycki</p>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -26,11 +39,28 @@
           <label for="description" style="margin-bottom: 0px">DESCRIPTION</label>
         </div>
         <div class="col-7">
-          <textarea id="description" type="text" rows="6" class="form-control" placeholder="Write about your event. Be creative"
+          <textarea id="description" type="text" rows="6" class="form-control"
+                    placeholder="Write about your event. Be creative"
                     formControlName="description" style="resize: none"></textarea>
+          <div class="d-flex justify-content-between">
+            <span>Max length 140 characters</span>
+            <span>{{(140 - aboutForm.value.description.length)}}</span>
+          </div>
+
         </div>
         <div class="col-2">
-          <span>validation info</span>
+          <div class="alert alert-danger validation-alert"
+               *ngIf="aboutForm.controls.description.invalid && (aboutForm.controls.description.dirty || aboutForm.controls.description.touched)">
+            <div *ngIf="aboutForm.controls.description.errors.required">
+              Description is required
+            </div>
+            <div *ngIf="aboutForm.controls.description.errors.minLength">
+             min
+            </div>
+            <div *ngIf="aboutForm.controls.description.errors.maxLength">
+              max
+            </div>
+          </div>
         </div>
       </div>
 
@@ -45,7 +75,12 @@
           </select>
         </div>
         <div class="col-2">
-          <span>validation info</span>
+          <div class="alert alert-danger validation-alert"
+               *ngIf="aboutForm.controls.category.invalid && (aboutForm.controls.category.dirty || aboutForm.controls.category.touched)">
+            <div *ngIf="aboutForm.controls.category.errors.required">
+              Category is required
+            </div>
+          </div>
         </div>
       </div>
 
@@ -64,11 +99,17 @@
                    formControlName="eventRadio">
             <label class="form-check-label" for="inlineRadio2">Paid event</label>
           </div>
-          <input type="text" id="fee" formControlName="fee" class="form-control" style="width: 5rem; display: inline" placeholder="fee">
+          <input type="text" id="fee" formControlName="fee" class="form-control" style="width: 5rem; display: inline"
+                 placeholder="fee">
           <span style="margin-left: 1rem">$</span>
         </div>
         <div class="col-2">
-          <span>validation info</span>
+          <div class="alert alert-danger validation-alert"
+               *ngIf="aboutForm.controls.eventRadio.invalid && (aboutForm.controls.eventRadio.dirty || aboutForm.controls.eventRadio.touched)">
+            <div *ngIf="aboutForm.controls.eventRadio.errors.required">
+              Payment method is required
+            </div>
+          </div>
         </div>
       </div>
 
@@ -80,16 +121,14 @@
           <input type="text" id="reward" class="form-control" style="width: 5rem; display: inline" placeholder="Numer">
           <span style="margin-left: 1rem">reward points for attendance</span>
         </div>
-        <div class="col-2">
-          <span>validation info</span>
-        </div>
+        <div class="col-2"></div>
       </div>
 
 
-      <p>
-        Value: {{ aboutForm.value | json }}
-        Valid: {{ aboutForm.valid | json }}
-      </p>
+      <!--<p>-->
+        <!--Value: {{ aboutForm.value | json }}-->
+        <!--Valid: {{ aboutForm.valid | json }}-->
+      <!--</p>-->
     </mat-card-content>
 
   </mat-card>
@@ -143,34 +182,34 @@
     </mat-card-header>
     <mat-card-content>
 
-        <div class="form-inline row space-top">
-          <div class="col-2 label-align">
-            <label for="calendar">STARTS ON</label>
-          </div>
+      <div class="form-inline row space-top">
+        <div class="col-2 label-align">
+          <label for="calendar">STARTS ON</label>
+        </div>
 
-          <div class="col-7 input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" id="calendar" formControlName="calendar"
-                   name="calendar" ngbDatepicker #d="ngbDatepicker">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
-                <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
-              </button>
-            </div>
-            <label for="appt-time">AT</label>
-            <input type="time" class="form-control" id="appt-time" name="appt-time"
-                   min="1:00" max="12:00" required />
-            <div class="form-check form-check-inline" id="payment">
-              <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio1" value="free"
-                     formControlName="eventRadio">
-              <label class="form-check-label" for="inlineRadio1">Free event</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio2" value="charge"
-                     formControlName="eventRadio">
-              <label class="form-check-label" for="inlineRadio2">Paid event</label>
-            </div>
+        <div class="col-7 input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd" id="calendar" formControlName="calendar"
+                 name="calendar" ngbDatepicker #d="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+              <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+            </button>
+          </div>
+          <label for="appt-time">AT</label>
+          <input type="time" class="form-control" id="appt-time" name="appt-time"
+                 min="1:00" max="12:00" required/>
+          <div class="form-check form-check-inline" id="am-pm">
+            <input class="form-check-input" type="radio" name="timeRadio" id="inlineRadio3" value="free"
+                   formControlName="timeRadio">
+            <label class="form-check-label" for="inlineRadio1">Free event</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="timeRadio" id="inlineRadio4" value="charge"
+                   formControlName="timeRadio">
+            <label class="form-check-label" for="inlineRadio2">Paid event</label>
           </div>
         </div>
+      </div>
 
       <!--<pre>Model: {{ model | json }}</pre>-->
       <div class="row space-top">
@@ -178,7 +217,7 @@
           <label for="reward">REWARD</label>
         </div>
         <div class="col-7">
-          <input type="text" id="reward" class="form-control" style="width: 5rem; display: inline" placeholder="Numer">
+          <input type="text" id="reward" class="form-control" style="width: 5rem; display: inline" placeholder="Number">
           <span style="margin-left: 1rem">reward points for attendance</span>
         </div>
         <div class="col-2">
@@ -192,9 +231,9 @@
 
   <div class="card-margin-top">
     <div class="d-flex justify-content-center align-items-center">
-        <button type="submit" class="btn btn-primary">
-          PUBLISH EVENT
-        </button>
+      <button type="submit" class="btn btn-primary">
+        PUBLISH EVENT
+      </button>
     </div>
   </div>
 </form>

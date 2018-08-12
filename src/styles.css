@@ -29,3 +29,7 @@ body{
   padding-top: 0.5rem;
   margin-left: 1rem;
 }
+
+.alert .validation-alert{
+  padding: 0.45rem 1.25rem;
+}
