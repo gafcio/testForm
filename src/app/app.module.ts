@@ -6,11 +6,12 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material';
 import { FirstFormComponent } from './pages/first-form/first-form.component';
-import { SecondFormComponent } from './pages/second-form/second-form.component';
+import { SecondFormComponent } from './pages/success-alert/second-form.component';
 import { ThirdFormComponent } from './pages/third-form/third-form.component';
 import { HeaderComponent } from './modules/shared/header/header.component';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule.forRoot()
 
   ],
   providers: [HttpModule, HttpClientModule],

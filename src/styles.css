@@ -2,7 +2,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 body{
-  background-color: #f9f9f9;
+  background-color: #f9f9f9 !important;
 }
 
 .container{
@@ -26,5 +26,6 @@ body{
 .label-align {
   display: flex;
   justify-content: start;
-  align-items: center;
+  padding-top: 0.5rem;
+  margin-left: 1rem;
 }

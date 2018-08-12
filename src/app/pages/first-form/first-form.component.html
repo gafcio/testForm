@@ -1,82 +1,86 @@
-<form [formGroup]="aboutForm">
+<form [formGroup]="aboutForm" (ngSubmit)="onSubmit()">
   <mat-card class="card-margin-top">
     <mat-card-header>
-      <h4 class="primary">About</h4>
+      <h4 class="primary">
+        About
+      </h4>
+
     </mat-card-header>
+
     <mat-card-content>
-
-
       <div class="row space-top">
-        <div class="col-3 label-align">
+        <div class="col-2 label-align">
           <label for="title" style="margin-bottom: 0px">TITLE</label>
         </div>
-        <div class="col-6">
+        <div class="col-7">
           <input id="title" type="text" class="form-control" placeholder="Make it short and clean"
                  formControlName="title">
         </div>
-        <div class="col-3">
+        <div class="col-2">
           <span>validation info</span>
         </div>
       </div>
 
       <div class="row space-top">
-        <div class="col-3 label-align">
+        <div class="col-2 label-align">
           <label for="description" style="margin-bottom: 0px">DESCRIPTION</label>
         </div>
-        <div class="col-6">
-          <textarea id="description" type="text" rows="6" class="form-control" placeholder="Make it short and clean"
+        <div class="col-7">
+          <textarea id="description" type="text" rows="6" class="form-control" placeholder="Write about your event. Be creative"
                     formControlName="description" style="resize: none"></textarea>
         </div>
-        <div class="col-3">
+        <div class="col-2">
           <span>validation info</span>
         </div>
       </div>
 
       <div class="row space-top">
-        <div class="col-3 label-align">
+        <div class="col-2 label-align">
           <label for="category">OPTIONS</label>
         </div>
-        <div class="col-6">
+        <div class="col-7">
           <select class="custom-select" formControlName="category" id="category">
-            <option selected>Choose...</option>
-            <option *ngFor="let singleCategory of emplyeesData">{{singleCategory.name}}</option>
+            <option selected>Select category</option>
+            <option *ngFor="let singleCategory of categories">{{singleCategory.name}}</option>
           </select>
         </div>
-        <div class="col-3">
+        <div class="col-2">
           <span>validation info</span>
         </div>
       </div>
 
       <div class="row space-top">
-        <div class="col-3 label-align">
+        <div class="col-2 label-align">
           <label for="payment">PAYMENT</label>
         </div>
-        <div class="col-6">
+        <div class="col-7">
           <div class="form-check form-check-inline" id="payment">
-            <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio1" value="option1"
+            <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio1" value="free"
                    formControlName="eventRadio">
             <label class="form-check-label" for="inlineRadio1">Free event</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio2" value="option2"
+            <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio2" value="charge"
                    formControlName="eventRadio">
             <label class="form-check-label" for="inlineRadio2">Paid event</label>
           </div>
+          <input type="text" id="fee" formControlName="fee" class="form-control" style="width: 5rem; display: inline" placeholder="fee">
+          <span style="margin-left: 1rem">$</span>
         </div>
-        <div class="col-3">
+        <div class="col-2">
           <span>validation info</span>
         </div>
       </div>
 
       <div class="row space-top">
-        <div class="col-3 label-align">
+        <div class="col-2 label-align">
           <label for="reward">REWARD</label>
         </div>
-        <div class="col-6">
+        <div class="col-7">
           <input type="text" id="reward" class="form-control" style="width: 5rem; display: inline" placeholder="Numer">
           <span style="margin-left: 1rem">reward points for attendance</span>
         </div>
-        <div class="col-3">
+        <div class="col-2">
           <span>validation info</span>
         </div>
       </div>
@@ -90,39 +94,107 @@
 
   </mat-card>
 
+  <!--Second part of form-->
+
   <mat-card class="card-margin-top">
     <mat-card-header>
-      <h4>Coordinator</h4>
+      <div>
+        <h4>Coordinator</h4>
+      </div>
     </mat-card-header>
+    <hr/>
     <mat-card-content>
       <div class="row space-top">
-        <div class="col-3 label-align">
+        <div class="col-2 label-align">
           <label for="category">OPTIONS</label>
         </div>
-        <div class="col-6">
+        <div class="col-7">
           <select class="custom-select" formControlName="employee" id="category">
             <option selected>Choose...</option>
             <option *ngFor="let singleEmployee of employes">{{singleEmployee.name}}</option>
           </select>
         </div>
-        <div class="col-3">
+        <div class="col-2">
           <span>validation info</span>
         </div>
       </div>
 
 
       <div class="row space-top">
-        <div class="col-3 label-align">
+        <div class="col-2 label-align">
           <label for="title" style="margin-bottom: 0px">TITLE</label>
         </div>
-        <div class="col-6">
+        <div class="col-7">
           <input id="email" type="text" class="form-control" placeholder="Make it short and clean"
                  formControlName="email">
         </div>
-        <div class="col-3">
+        <div class="col-2">
           <span>validation info</span>
         </div>
       </div>
     </mat-card-content>
   </mat-card>
+
+  <!--Third part of form with data and hour picker-->
+
+  <mat-card class="card-margin-top">
+    <mat-card-header>
+      <h4>Date</h4>
+    </mat-card-header>
+    <mat-card-content>
+
+        <div class="form-inline row space-top">
+          <div class="col-2 label-align">
+            <label for="calendar">STARTS ON</label>
+          </div>
+
+          <div class="col-7 input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" id="calendar" formControlName="calendar"
+                   name="calendar" ngbDatepicker #d="ngbDatepicker">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+                <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+              </button>
+            </div>
+            <label for="appt-time">AT</label>
+            <input type="time" class="form-control" id="appt-time" name="appt-time"
+                   min="1:00" max="12:00" required />
+            <div class="form-check form-check-inline" id="payment">
+              <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio1" value="free"
+                     formControlName="eventRadio">
+              <label class="form-check-label" for="inlineRadio1">Free event</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio2" value="charge"
+                     formControlName="eventRadio">
+              <label class="form-check-label" for="inlineRadio2">Paid event</label>
+            </div>
+          </div>
+        </div>
+
+      <!--<pre>Model: {{ model | json }}</pre>-->
+      <div class="row space-top">
+        <div class="col-2 label-align">
+          <label for="reward">REWARD</label>
+        </div>
+        <div class="col-7">
+          <input type="text" id="reward" class="form-control" style="width: 5rem; display: inline" placeholder="Numer">
+          <span style="margin-left: 1rem">reward points for attendance</span>
+        </div>
+        <div class="col-2">
+          <span>validation info</span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!--Submit button-->
+
+  <div class="card-margin-top">
+    <div class="d-flex justify-content-center align-items-center">
+        <button type="submit" class="btn btn-primary">
+          PUBLISH EVENT
+        </button>
+    </div>
+  </div>
 </form>

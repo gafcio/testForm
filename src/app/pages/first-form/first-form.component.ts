@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormService } from '../../core/services/form-service.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormService} from '../../core/services/form-service.service';
 
 
 @Component({
@@ -14,10 +14,8 @@ export class FirstFormComponent implements OnInit {
   categories: object;
   employes: object
 
-  constructor(
-    private fb: FormBuilder,
-    private service: FormService
-  ) {
+  constructor(private fb: FormBuilder,
+              private service: FormService) {
   }
 
   ngOnInit() {
@@ -25,6 +23,8 @@ export class FirstFormComponent implements OnInit {
     this.getCategories();
     this.getEmployees()
     this.setValidators();
+    this.setForm();
+
 
   }
 
@@ -50,9 +50,30 @@ export class FirstFormComponent implements OnInit {
       options: '',
       eventRadio: ['', Validators.required],
       email: ['', Validators.required],
-      employee: ['', Validators.required]
+      employee: ['', Validators.required],
+      fee: '',
+      calendar: ['', Validators.required]
       // number: ['', [Validators.required, Validators.maxLength(40)]]
     });
+  }
+
+  setForm() {
+    this.aboutForm.get('fee').disable();
+    this.aboutForm.get('eventRadio').valueChanges.subscribe(radioValue => {
+      if (radioValue == 'charge') {
+        this.aboutForm.get('fee').enable();
+        this.aboutForm.get('fee').setValidators(Validators.required);
+      }
+      else {
+        this.aboutForm.get('fee').disable();
+        this.aboutForm.get('fee').clearValidators();
+      }
+      this.aboutForm.get('fee').updateValueAndValidity();
+    });
+  }
+
+  onSubmit() {
+    console.warn(this.aboutForm.value);
   }
 
 }
