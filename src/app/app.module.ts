@@ -11,7 +11,7 @@ import { ThirdFormComponent } from './pages/third-form/third-form.component';
 import { HeaderComponent } from './modules/shared/header/header.component';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
-import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [

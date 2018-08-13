@@ -12,7 +12,8 @@ export class FirstFormComponent implements OnInit {
 
   aboutForm: FormGroup;
   categories: object;
-  employes: object
+  employes: object;
+  feeShow: boolean;
 
   constructor(private fb: FormBuilder,
               private service: FormService) {
@@ -44,7 +45,7 @@ export class FirstFormComponent implements OnInit {
 
   setValidators() {
     this.aboutForm = this.fb.group({
-      title: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(100)])],
+      title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.maxLength(140), Validators.minLength(2)]],
       category: ['', Validators.required],
       options: '',
@@ -61,11 +62,15 @@ export class FirstFormComponent implements OnInit {
   setForm() {
     this.aboutForm.get('fee').disable();
     this.aboutForm.get('eventRadio').valueChanges.subscribe(radioValue => {
-      if (radioValue == 'charge') {
+      if (radioValue === 'true') {
+        console.log('true')
         this.aboutForm.get('fee').enable();
+        this.feeShow = true;
         this.aboutForm.get('fee').setValidators(Validators.required);
       }
       else {
+        console.log('false')
+        this.feeShow = false;
         this.aboutForm.get('fee').disable();
         this.aboutForm.get('fee').clearValidators();
       }

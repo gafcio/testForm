@@ -13,7 +13,7 @@
           <label for="title" style="margin-bottom: 0px">TITLE</label>
         </div>
         <div class="col-7">
-          <input id="title" type="text" class="form-control" placeholder="Make it short and clean"
+          <input id="title" type="text" class="form-control" ngClass="" placeholder="Make it short and clean"
                  formControlName="title">
         </div>
         <div class="col-2">
@@ -22,13 +22,11 @@
             <div *ngIf="aboutForm.controls.title.errors.required">
               title is required
             </div>
-            <div *ngIf="aboutForm.controls.title.errors.maxLength">
+            <div *ngIf="aboutForm.controls.title.errors.maxlength">
               Too much length
-              <p>dupa</p>
             </div>
-            <div *ngIf="aboutForm.controls.title.errors.minLength">
+            <div *ngIf="aboutForm.controls.title.errors.minlength">
               More text
-              <p>cycki</p>
             </div>
           </div>
         </div>
@@ -88,20 +86,21 @@
         <div class="col-2 label-align">
           <label for="payment">PAYMENT</label>
         </div>
-        <div class="col-7">
+        <div class="col-7 d-flex align-items-center">
           <div class="form-check form-check-inline" id="payment">
-            <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio1" value="free"
+            <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio1" value=false
                    formControlName="eventRadio">
             <label class="form-check-label" for="inlineRadio1">Free event</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio2" value="charge"
+            <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio2" value=true
                    formControlName="eventRadio">
             <label class="form-check-label" for="inlineRadio2">Paid event</label>
           </div>
-          <input type="text" id="fee" formControlName="fee" class="form-control" style="width: 5rem; display: inline"
-                 placeholder="fee">
-          <span style="margin-left: 1rem">$</span>
+            <input *ngIf="feeShow" type="text" id="fee" formControlName="fee" class="form-control" style="width: 5rem; display: inline"
+                    placeholder="fee">
+            <label *ngIf="feeShow" for="fee">$</label>
+
         </div>
         <div class="col-2">
           <div class="alert alert-danger validation-alert"
@@ -125,10 +124,10 @@
       </div>
 
 
-      <!--<p>-->
-        <!--Value: {{ aboutForm.value | json }}-->
-        <!--Valid: {{ aboutForm.valid | json }}-->
-      <!--</p>-->
+      <p>
+        Value: {{ aboutForm.value | json }}
+        Valid: {{ aboutForm.valid | json }}
+      </p>
     </mat-card-content>
 
   </mat-card>
