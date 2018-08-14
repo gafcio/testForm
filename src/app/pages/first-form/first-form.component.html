@@ -70,11 +70,11 @@
             <div *ngIf="aboutForm.controls.description.errors.required">
               Description is required
             </div>
-            <div *ngIf="aboutForm.controls.description.errors.minLength">
-              min
+            <div *ngIf="aboutForm.controls.description.errors.minlength">
+              More text
             </div>
-            <div *ngIf="aboutForm.controls.description.errors.maxLength">
-              max
+            <div *ngIf="aboutForm.controls.description.errors.maxlength">
+              Too much text
             </div>
           </div>
         </div>
@@ -149,10 +149,10 @@
       </div>
 
 
-      <p>
-        Value: {{ aboutForm.value | json }}
-        Valid: {{ aboutForm.valid | json }}
-      </p>
+      <!--<p>-->
+        <!--Value: {{ aboutForm.value | json }}-->
+        <!--Valid: {{ aboutForm.valid | json }}-->
+      <!--</p>-->
     </mat-card-content>
 
   </mat-card>
@@ -229,7 +229,8 @@
 
         <div class="col-7 input-group">
           <input class="form-control " placeholder="yyyy-mm-dd" id="calendar" formControlName="calendar"
-                 name="calendar" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="date">
+                 name="calendar" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="date"
+                 [ngClass]="aboutForm.controls.calendar.invalid && (aboutForm.controls.calendar.dirty || aboutForm.controls.calendar.touched) ? 'validation-fail-border' : ''">
           <div class="input-group-append mr-2">
             <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
               <fa-icon [icon]="['fas', 'calendar']"></fa-icon>
@@ -237,18 +238,18 @@
           </div>
           <label for="appt-time" class="mr-2">at</label>
           <input type="time" class="form-control mr-2" id="appt-time" name="appt-time"
-                 min="1:00" max="12:00" formControlName="time"/>
-          <div class="form-check form-check-inline" id="am-pm">
-            <input class="form-check-input" type="radio" name="timeRadio" id="inlineRadio3" value="AM"
-                   formControlName="timeRadio">
-            <label class="form-check-label" for="inlineRadio3">AM</label>
-          </div>
-          <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="timeRadio" id="inlineRadio4" value="PM"
-                   formControlName="timeRadio">
-            <label class="form-check-label" for="inlineRadio2">PM</label>
-          </div>
+                 min="1:00" max="12:00" formControlName="time" [ngClass]="aboutForm.controls.time.invalid && (aboutForm.controls.time.dirty || aboutForm.controls.time.touched) ? 'validation-fail-border' : ''"/>
+          <div class=" form-check form-check-inline" id="am-pm">
+          <input class="form-check-input" type="radio" name="timeRadio" id="inlineRadio3" value="AM"
+                 formControlName="timeRadio">
+          <label class="form-check-label" for="inlineRadio3">AM</label>
         </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="timeRadio" id="inlineRadio4" value="PM"
+                 formControlName="timeRadio">
+          <label class="form-check-label" for="inlineRadio2">PM</label>
+        </div>
+      </div>
       </div>
 
       <!--<pre>Model: {{ model | json }}</pre>-->

@@ -98,6 +98,7 @@ export class FirstFormComponent implements OnInit {
       reward: this.aboutForm.controls.reward.value,
       email: this.aboutForm.controls.email.value,
       date: this.aboutForm.controls.calendar.value, // YYYY-MM-DDTHH:mm (example: 2018-01-19T15:15)
+      time: this.aboutForm.controls.time.value + this.aboutForm.controls.timeRadio.value,
       duration: (this.aboutForm.controls.duration.value) * 360, // in seconds
       coordinator: {
         email: this.aboutForm.controls.email.value,
