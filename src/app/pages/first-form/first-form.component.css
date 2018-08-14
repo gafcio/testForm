@@ -28,3 +28,8 @@
   margin-bottom: 2rem;
   margin-left: 1rem;
 }
+
+#rewardNumber{
+  width: 6.0rem;
+  display: inline;
+}

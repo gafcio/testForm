@@ -48,7 +48,8 @@
             [ngClass]="aboutForm.controls.description.invalid && (aboutForm.controls.description.dirty || aboutForm.controls.description.touched) ? 'validation-fail-font' : ''"
             for="description" style="margin-bottom: 0px">
             DESCRIPTION
-            <span *ngIf="aboutForm.controls.description.invalid && (aboutForm.controls.description.dirty || aboutForm.controls.description.touched)">*</span>
+            <span
+              *ngIf="aboutForm.controls.description.invalid && (aboutForm.controls.description.dirty || aboutForm.controls.description.touched)">*</span>
           </label>
         </div>
         <div class="col-7">
@@ -103,8 +104,9 @@
         <div class="col-2 label-align">
           <label for="payment" class="main-label">PAYMENT</label>
         </div>
-        <div class="col-7 d-flex" [ngClass]="aboutForm.controls.paid_event.invalid && (aboutForm.controls.paid_event.dirty || aboutForm.controls.paid_event.touched) ? 'validation-fail-border' : ''">
-          <div class="form-check form-check-inline"  id="payment">
+        <div class="col-7 d-flex"
+             [ngClass]="aboutForm.controls.paid_event.invalid && (aboutForm.controls.paid_event.dirty || aboutForm.controls.paid_event.touched) ? 'validation-fail-border' : ''">
+          <div class="form-check form-check-inline" id="payment">
             <input class="form-check-input" type="radio" name="paid_event" id="inlineRadio1" value=false
                    formControlName="paid_event">
             <label class="form-check-label" for="inlineRadio1">Free event</label>
@@ -115,7 +117,7 @@
             <label class="form-check-label" for="inlineRadio2">Paid event</label>
           </div>
           <input *ngIf="feeShow" type="number" id="fee" formControlName="event_fee" class="form-control"
-                 style="width: 5rem; display: inline"
+                 style="width: 5rem; display: inline" min="0"
                  placeholder="fee"
                  [ngClass]="aboutForm.controls.event_fee.invalid && (aboutForm.controls.event_fee.dirty || aboutForm.controls.event_fee.touched) ? 'validation-fail-border' : ''">
           <label *ngIf="feeShow" for="fee" class="ml-2 mt-2">$</label>
@@ -139,7 +141,8 @@
           <label for="reward" class="main-label">REWARD</label>
         </div>
         <div class="col-7">
-          <input type="text" id="reward" class="form-control" formControlName="reward" form style="width: 5rem; display: inline" placeholder="Numer">
+          <input type="text" id="reward" class="form-control" formControlName="reward" form
+                 style="width: 6rem; display: inline" placeholder="Number">
           <span style="margin-left: 1rem">reward points for attendance</span>
         </div>
         <div class="col-2"></div>
@@ -158,37 +161,53 @@
 
   <mat-card class="card-margin-top">
     <div class="header-container">
-        <h4 class="main-header">Coordinator</h4>
+      <h4 class="main-header">Coordinator</h4>
       <hr>
 
     </div>
     <mat-card-content>
       <div class="row space-top">
         <div class="col-2 label-align">
-          <label for="category" class="main-label">RESPONSIBILE</label>
+          <label for="category" class="main-label"
+                 [ngClass]="aboutForm.controls.id.invalid && (aboutForm.controls.id.dirty || aboutForm.controls.id.touched) ? 'validation-fail-font' : ''">RESPONSIBILE</label>
         </div>
         <div class="col-7">
-          <select class="custom-select" formControlName="coordinator" id="category">
-            <option selected>Choose...</option>
-            <option *ngFor="let singleEmployee of employes">{{singleEmployee.name}}</option>
+          <select class="custom-select" formControlName="id" id="category"
+                  [ngClass]="aboutForm.controls.id.invalid && (aboutForm.controls.id.dirty || aboutForm.controls.id.touched) ? 'validation-fail-border' : ''">
+            <option selected>Me - Gaweł Konefeld</option>
+            <option *ngFor="let singleEmployee of employes">{{singleEmployee.name}} {{singleEmployee.lastname}}</option>
           </select>
         </div>
         <div class="col-2">
-          <span>validation info</span>
+          <div class="alert alert-danger validation-alert"
+               *ngIf="aboutForm.controls.id.invalid && (aboutForm.controls.id.dirty || aboutForm.controls.id.touched)">
+            <div *ngIf="aboutForm.controls.id.errors.required">
+              Coordinator is required
+            </div>
+          </div>
         </div>
       </div>
 
 
       <div class="row space-top">
         <div class="col-2 label-align">
-          <label for="title" class="main-label" style="margin-bottom: 0px">TITLE</label>
+          <label for="title" class="main-label" style="margin-bottom: 0px">EMAIL</label>
         </div>
         <div class="col-7">
-          <input id="email" type="text" class="form-control" placeholder="Make it short and clean"
-                 formControlName="email">
+          <input id="email" type="text" class="form-control" placeholder="Your email address"
+                 formControlName="email"
+                 [ngClass]="aboutForm.controls.email.invalid && (aboutForm.controls.email.dirty || aboutForm.controls.email.touched) ? 'validation-fail-border' : ''">
         </div>
         <div class="col-2">
-          <span>validation info</span>
+          <div class="alert alert-danger validation-alert"
+               *ngIf="aboutForm.controls.email.invalid && (aboutForm.controls.email.dirty || aboutForm.controls.email.touched)">
+            <div *ngIf="aboutForm.controls.email.errors.required">
+              Email is required
+            </div>
+            <div *ngIf="aboutForm.controls.email.errors.pattern">
+              Invalid email adress
+            </div>
+          </div>
         </div>
       </div>
     </mat-card-content>
@@ -213,21 +232,21 @@
                  name="calendar" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="date">
           <div class="input-group-append mr-2">
             <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
-              <i class="fas fa-calendar-alt"></i>
+              <fa-icon [icon]="['fas', 'calendar']"></fa-icon>
             </button>
           </div>
           <label for="appt-time" class="mr-2">at</label>
           <input type="time" class="form-control mr-2" id="appt-time" name="appt-time"
-                 min="1:00" max="12:00" />
+                 min="1:00" max="12:00" formControlName="time"/>
           <div class="form-check form-check-inline" id="am-pm">
-            <input class="form-check-input" type="radio" name="timeRadio" id="inlineRadio3" value="free"
+            <input class="form-check-input" type="radio" name="timeRadio" id="inlineRadio3" value="AM"
                    formControlName="timeRadio">
-            <label class="form-check-label" for="inlineRadio1">Free event</label>
+            <label class="form-check-label" for="inlineRadio3">AM</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="timeRadio" id="inlineRadio4" value="charge"
+            <input class="form-check-input" type="radio" name="timeRadio" id="inlineRadio4" value="PM"
                    formControlName="timeRadio">
-            <label class="form-check-label" for="inlineRadio2">Paid event</label>
+            <label class="form-check-label" for="inlineRadio2">PM</label>
           </div>
         </div>
       </div>
@@ -235,11 +254,12 @@
       <!--<pre>Model: {{ model | json }}</pre>-->
       <div class="row space-top">
         <div class="col-2 label-align">
-          <label for="reward" class="main-label">REWARD</label>
+          <label for="duration" class="main-label">DURATION</label>
         </div>
         <div class="col-7">
-          <input type="number" id="reward" class="form-control" style="width: 5rem; display: inline" placeholder="Number">
-          <span style="margin-left: 1rem">reward points for attendance</span>
+          <input type="number" style="width: 6rem; display: inline" id="duration" class="form-control"
+                 placeholder="Number" formControlName="duration">
+          <span style="margin-left: 1rem">hours</span>
         </div>
         <div class="col-2">
         </div>
