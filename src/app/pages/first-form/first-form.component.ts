@@ -14,6 +14,7 @@ export class FirstFormComponent implements OnInit {
   categories: object;
   employes: object;
   feeShow: boolean;
+  date: string;
 
   constructor(private fb: FormBuilder,
               private service: FormService) {
@@ -24,8 +25,6 @@ export class FirstFormComponent implements OnInit {
     this.getCategories();
     this.getEmployees()
     this.setValidators();
-    this.setForm();
-
 
   }
 
@@ -47,34 +46,16 @@ export class FirstFormComponent implements OnInit {
     this.aboutForm = this.fb.group({
       title: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.maxLength(140), Validators.minLength(2)]],
-      category: ['', Validators.required],
+      category_id: ['', Validators.required],
       options: '',
-      eventRadio: ['', Validators.required],
+      paid_event: ['', Validators.required],
+      event_fee: ['', Validators.required],
+      reward: '',
       email: ['', Validators.required],
-      employee: ['', Validators.required],
-      fee: '',
-      calendar: ['', Validators.required],
+      coordinator: ['', Validators.required],
+      calendar: [this.date, Validators.required],
       timeRadio: ''
       // number: ['', [Validators.required, Validators.maxLength(40)]]
-    });
-  }
-
-  setForm() {
-    this.aboutForm.get('fee').disable();
-    this.aboutForm.get('eventRadio').valueChanges.subscribe(radioValue => {
-      if (radioValue === 'true') {
-        console.log('true')
-        this.aboutForm.get('fee').enable();
-        this.feeShow = true;
-        this.aboutForm.get('fee').setValidators(Validators.required);
-      }
-      else {
-        console.log('false')
-        this.feeShow = false;
-        this.aboutForm.get('fee').disable();
-        this.aboutForm.get('fee').clearValidators();
-      }
-      this.aboutForm.get('fee').updateValueAndValidity();
     });
   }
 

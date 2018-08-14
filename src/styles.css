@@ -3,6 +3,7 @@
 
 body{
   background-color: #f9f9f9 !important;
+  font-family: 'Roboto Condensed', sans-serif;
 }
 
 .container{
@@ -32,4 +33,10 @@ body{
 
 .alert .validation-alert{
   padding: 0.45rem 1.25rem;
+}
+
+.main-label{
+  color: #8ca2c2;
+  font-weight: 500;
+  font-size: 1.0rem;
 }

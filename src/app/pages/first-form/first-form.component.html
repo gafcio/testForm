@@ -1,19 +1,28 @@
 <form [formGroup]="aboutForm" (ngSubmit)="onSubmit()">
   <mat-card class="card-margin-top">
-    <mat-card-header>
-      <h4 class="primary">
+    <div class="header-container">
+      <h4 class="main-header">
         About
       </h4>
-
-    </mat-card-header>
-
+      <hr>
+    </div>
     <mat-card-content>
       <div class="row space-top">
         <div class="col-2 label-align">
-          <label for="title" style="margin-bottom: 0px">TITLE</label>
+          <label
+            class="main-label"
+            [ngClass]="aboutForm.controls.title.invalid && (aboutForm.controls.title.dirty || aboutForm.controls.title.touched) ? 'validation-fail-font' : ''"
+            for="title" style="margin-bottom: 0px">
+            TITLE
+            <span
+              *ngIf="aboutForm.controls.title.invalid && (aboutForm.controls.title.dirty || aboutForm.controls.title.touched)"
+              class="validation-fail-font">*</span>
+          </label>
         </div>
         <div class="col-7">
-          <input id="title" type="text" class="form-control" ngClass="" placeholder="Make it short and clean"
+          <input id="title"
+                 [ngClass]="aboutForm.controls.title.invalid && (aboutForm.controls.title.dirty || aboutForm.controls.title.touched) ? 'validation-fail-border' : ''"
+                 type="text" class="form-control" ngClass="" placeholder="Make it short and clean"
                  formControlName="title">
         </div>
         <div class="col-2">
@@ -34,13 +43,21 @@
 
       <div class="row space-top">
         <div class="col-2 label-align">
-          <label for="description" style="margin-bottom: 0px">DESCRIPTION</label>
+          <label
+            class="main-label"
+            [ngClass]="aboutForm.controls.description.invalid && (aboutForm.controls.description.dirty || aboutForm.controls.description.touched) ? 'validation-fail-font' : ''"
+            for="description" style="margin-bottom: 0px">
+            DESCRIPTION
+            <span *ngIf="aboutForm.controls.description.invalid && (aboutForm.controls.description.dirty || aboutForm.controls.description.touched)">*</span>
+          </label>
         </div>
         <div class="col-7">
           <textarea id="description" type="text" rows="6" class="form-control"
                     placeholder="Write about your event. Be creative"
-                    formControlName="description" style="resize: none"></textarea>
-          <div class="d-flex justify-content-between">
+                    formControlName="description"
+                    [ngClass]="aboutForm.controls.description.invalid && (aboutForm.controls.description.dirty || aboutForm.controls.description.touched) ? 'validation-fail-border' : ''"
+                    style="resize: none"></textarea>
+          <div class="d-flex justify-content-between textArea-extra">
             <span>Max length 140 characters</span>
             <span>{{(140 - aboutForm.value.description.length)}}</span>
           </div>
@@ -53,7 +70,7 @@
               Description is required
             </div>
             <div *ngIf="aboutForm.controls.description.errors.minLength">
-             min
+              min
             </div>
             <div *ngIf="aboutForm.controls.description.errors.maxLength">
               max
@@ -64,18 +81,18 @@
 
       <div class="row space-top">
         <div class="col-2 label-align">
-          <label for="category">OPTIONS</label>
+          <label for="category" class="main-label">CATEGORY</label>
         </div>
         <div class="col-7">
-          <select class="custom-select" formControlName="category" id="category">
+          <select class="custom-select" formControlName="category_id" id="category">
             <option selected>Select category</option>
             <option *ngFor="let singleCategory of categories">{{singleCategory.name}}</option>
           </select>
         </div>
         <div class="col-2">
           <div class="alert alert-danger validation-alert"
-               *ngIf="aboutForm.controls.category.invalid && (aboutForm.controls.category.dirty || aboutForm.controls.category.touched)">
-            <div *ngIf="aboutForm.controls.category.errors.required">
+               *ngIf="aboutForm.controls.category_id.invalid && (aboutForm.controls.category_id.dirty || aboutForm.controls.category_id.touched)">
+            <div *ngIf="aboutForm.controls.category_id.errors.required">
               Category is required
             </div>
           </div>
@@ -84,29 +101,34 @@
 
       <div class="row space-top">
         <div class="col-2 label-align">
-          <label for="payment">PAYMENT</label>
+          <label for="payment" class="main-label">PAYMENT</label>
         </div>
-        <div class="col-7 d-flex align-items-center">
-          <div class="form-check form-check-inline" id="payment">
-            <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio1" value=false
-                   formControlName="eventRadio">
+        <div class="col-7 d-flex" [ngClass]="aboutForm.controls.paid_event.invalid && (aboutForm.controls.paid_event.dirty || aboutForm.controls.paid_event.touched) ? 'validation-fail-border' : ''">
+          <div class="form-check form-check-inline"  id="payment">
+            <input class="form-check-input" type="radio" name="paid_event" id="inlineRadio1" value=false
+                   formControlName="paid_event">
             <label class="form-check-label" for="inlineRadio1">Free event</label>
           </div>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="eventRadio" id="inlineRadio2" value=true
-                   formControlName="eventRadio">
+            <input class="form-check-input" type="radio" name="paid_event" id="inlineRadio2" value=true
+                   formControlName="paid_event">
             <label class="form-check-label" for="inlineRadio2">Paid event</label>
           </div>
-            <input *ngIf="feeShow" type="text" id="fee" formControlName="fee" class="form-control" style="width: 5rem; display: inline"
-                    placeholder="fee">
-            <label *ngIf="feeShow" for="fee">$</label>
+          <input *ngIf="feeShow" type="number" id="fee" formControlName="event_fee" class="form-control"
+                 style="width: 5rem; display: inline"
+                 placeholder="fee"
+                 [ngClass]="aboutForm.controls.event_fee.invalid && (aboutForm.controls.event_fee.dirty || aboutForm.controls.event_fee.touched) ? 'validation-fail-border' : ''">
+          <label *ngIf="feeShow" for="fee" class="ml-2 mt-2">$</label>
 
         </div>
         <div class="col-2">
           <div class="alert alert-danger validation-alert"
-               *ngIf="aboutForm.controls.eventRadio.invalid && (aboutForm.controls.eventRadio.dirty || aboutForm.controls.eventRadio.touched)">
-            <div *ngIf="aboutForm.controls.eventRadio.errors.required">
+               *ngIf="aboutForm.controls.paid_event.invalid && (aboutForm.controls.paid_event.dirty || aboutForm.controls.paid_event.touched)">
+            <div *ngIf="aboutForm.controls.paid_event.errors.required">
               Payment method is required
+            </div>
+            <div *ngIf="aboutForm.controls.event_fee.errors.required">
+              Amount of fee is required
             </div>
           </div>
         </div>
@@ -114,10 +136,10 @@
 
       <div class="row space-top">
         <div class="col-2 label-align">
-          <label for="reward">REWARD</label>
+          <label for="reward" class="main-label">REWARD</label>
         </div>
         <div class="col-7">
-          <input type="text" id="reward" class="form-control" style="width: 5rem; display: inline" placeholder="Numer">
+          <input type="text" id="reward" class="form-control" formControlName="reward" form style="width: 5rem; display: inline" placeholder="Numer">
           <span style="margin-left: 1rem">reward points for attendance</span>
         </div>
         <div class="col-2"></div>
@@ -135,19 +157,18 @@
   <!--Second part of form-->
 
   <mat-card class="card-margin-top">
-    <mat-card-header>
-      <div>
-        <h4>Coordinator</h4>
-      </div>
-    </mat-card-header>
-    <hr/>
+    <div class="header-container">
+        <h4 class="main-header">Coordinator</h4>
+      <hr>
+
+    </div>
     <mat-card-content>
       <div class="row space-top">
         <div class="col-2 label-align">
-          <label for="category">OPTIONS</label>
+          <label for="category" class="main-label">RESPONSIBILE</label>
         </div>
         <div class="col-7">
-          <select class="custom-select" formControlName="employee" id="category">
+          <select class="custom-select" formControlName="coordinator" id="category">
             <option selected>Choose...</option>
             <option *ngFor="let singleEmployee of employes">{{singleEmployee.name}}</option>
           </select>
@@ -160,7 +181,7 @@
 
       <div class="row space-top">
         <div class="col-2 label-align">
-          <label for="title" style="margin-bottom: 0px">TITLE</label>
+          <label for="title" class="main-label" style="margin-bottom: 0px">TITLE</label>
         </div>
         <div class="col-7">
           <input id="email" type="text" class="form-control" placeholder="Make it short and clean"
@@ -176,27 +197,28 @@
   <!--Third part of form with data and hour picker-->
 
   <mat-card class="card-margin-top">
-    <mat-card-header>
-      <h4>Date</h4>
-    </mat-card-header>
+    <div class="header-container">
+      <h4 class="main-header">Date</h4>
+      <hr>
+    </div>
     <mat-card-content>
 
       <div class="form-inline row space-top">
         <div class="col-2 label-align">
-          <label for="calendar">STARTS ON</label>
+          <label for="calendar" class="main-label">STARTS ON</label>
         </div>
 
         <div class="col-7 input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd" id="calendar" formControlName="calendar"
-                 name="calendar" ngbDatepicker #d="ngbDatepicker">
-          <div class="input-group-append">
+          <input class="form-control " placeholder="yyyy-mm-dd" id="calendar" formControlName="calendar"
+                 name="calendar" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="date">
+          <div class="input-group-append mr-2">
             <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
-              <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+              <i class="fas fa-calendar-alt"></i>
             </button>
           </div>
-          <label for="appt-time">AT</label>
-          <input type="time" class="form-control" id="appt-time" name="appt-time"
-                 min="1:00" max="12:00" required/>
+          <label for="appt-time" class="mr-2">at</label>
+          <input type="time" class="form-control mr-2" id="appt-time" name="appt-time"
+                 min="1:00" max="12:00" />
           <div class="form-check form-check-inline" id="am-pm">
             <input class="form-check-input" type="radio" name="timeRadio" id="inlineRadio3" value="free"
                    formControlName="timeRadio">
@@ -213,14 +235,13 @@
       <!--<pre>Model: {{ model | json }}</pre>-->
       <div class="row space-top">
         <div class="col-2 label-align">
-          <label for="reward">REWARD</label>
+          <label for="reward" class="main-label">REWARD</label>
         </div>
         <div class="col-7">
-          <input type="text" id="reward" class="form-control" style="width: 5rem; display: inline" placeholder="Number">
+          <input type="number" id="reward" class="form-control" style="width: 5rem; display: inline" placeholder="Number">
           <span style="margin-left: 1rem">reward points for attendance</span>
         </div>
         <div class="col-2">
-          <span>validation info</span>
         </div>
       </div>
     </mat-card-content>

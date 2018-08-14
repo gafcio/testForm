@@ -6,3 +6,25 @@
   padding: 0.45rem 1.25rem !important;
   margin-bottom: 0rem !important;
 }
+
+.validation-fail-border{
+  border: 2px solid #ffb2b2;
+}
+
+.validation-fail-font{
+  color: #ffb2b2;
+}
+
+.textArea-extra{
+  color: darkgrey;
+  font-style: italic;
+}
+
+.main-header{
+  color: #355990;
+}
+
+.header-container{
+  margin-bottom: 2rem;
+  margin-left: 1rem;
+}
