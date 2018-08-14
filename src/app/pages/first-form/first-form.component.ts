@@ -69,7 +69,7 @@ export class FirstFormComponent implements OnInit {
       category_id: ['', Validators.required],
       options: '',
       paid_event: ['', Validators.required],
-      event_fee: ['', Validators.required],
+      event_fee: '',
       reward: '',
       email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
       id: ['', Validators.required],
@@ -83,7 +83,15 @@ export class FirstFormComponent implements OnInit {
 
   setForm(): void {
     this.aboutForm.get('paid_event').valueChanges.subscribe(radioValue => {
-      radioValue === 'true' ? this.feeShow = true : this.feeShow = false;
+      // radioValue === 'true' ? this.feeShow = true : this.feeShow = false;
+      if (radioValue === 'true') {
+        this.aboutForm.get('event_fee').setValidators(Validators.required);
+        this.aboutForm.get('event_fee').markAsTouched();
+        this.feeShow = true;
+      }
+      else {
+        this.feeShow = false;
+      }
       this.aboutForm.get('event_fee').updateValueAndValidity();
     });
   }
@@ -102,9 +110,9 @@ export class FirstFormComponent implements OnInit {
       duration: (this.aboutForm.controls.duration.value) * 360, // in seconds
       coordinator: {
         email: this.aboutForm.controls.email.value,
-        id: '',
+        id: this.aboutForm.controls.id.value,
       },
-    }
+    };
     console.warn(this.aboutForm);
     console.log(this.formToPost, 'fsdfdsfsdfs');
   }

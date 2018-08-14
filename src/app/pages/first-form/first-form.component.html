@@ -141,7 +141,7 @@
           <label for="reward" class="main-label">REWARD</label>
         </div>
         <div class="col-7">
-          <input type="text" id="reward" class="form-control" formControlName="reward" form
+          <input type="number" id="reward" class="form-control" formControlName="reward" form
                  style="width: 6rem; display: inline" placeholder="Number">
           <span style="margin-left: 1rem">reward points for attendance</span>
         </div>
@@ -151,7 +151,7 @@
 
       <!--<p>-->
         <!--Value: {{ aboutForm.value | json }}-->
-        <!--Valid: {{ aboutForm.valid | json }}-->
+        <!--Valid: {{ aboutForm.invalid | json }}-->
       <!--</p>-->
     </mat-card-content>
 
@@ -237,7 +237,7 @@
             </button>
           </div>
           <label for="appt-time" class="mr-2">at</label>
-          <input type="time" class="form-control mr-2" id="appt-time" name="appt-time"
+          <input type="time" class="form-control mr-2" id="appt-time" name="time"
                  min="1:00" max="12:00" formControlName="time" [ngClass]="aboutForm.controls.time.invalid && (aboutForm.controls.time.dirty || aboutForm.controls.time.touched) ? 'validation-fail-border' : ''"/>
           <div class=" form-check form-check-inline" id="am-pm">
           <input class="form-check-input" type="radio" name="timeRadio" id="inlineRadio3" value="AM"
@@ -272,7 +272,7 @@
 
   <div class="card-margin-top">
     <div class="d-flex justify-content-center align-items-center">
-      <button type="submit" class="btn btn-primary">
+      <button type="submit" [disabled]="aboutForm.invalid" class="btn btn-primary" onsubmit="onSubmit()" routerLink="success">
         PUBLISH EVENT
       </button>
     </div>
